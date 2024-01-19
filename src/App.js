@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import './App.css';
-import Chat from './Pages/Chat'
+import Chat from './utils/Chat';
+import SERVER_URL from './utils/config';
 
 function App() {
     const [messages, setMessages] = useState([]);
@@ -17,7 +18,7 @@ function App() {
         };
         console.log(JSON.stringify(messageData))
 
-        fetch('http://localhost:5000/api/sendMessage', {
+        fetch(`${SERVER_URL}/api/sendMessage`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +54,7 @@ function App() {
     };
 
     const fetchMessages = (userId) => {
-        fetch(`http://localhost:5000/api/messages?userId=${userId}`)
+        fetch(`${SERVER_URL}/api/messages?userId=${userId}`)
             .then(response => response.json())
             .then(data => setMessages(data.allMessages)) // Update here to match server's response
         // .catch(error => setServerError('Failed to load messages'));
@@ -65,14 +66,19 @@ function App() {
             setMessage('');
         }
     };
-
+    // todo show user message as soon as they hit enter not with the answer
     useEffect(() => {
-        const queryParams = new URLSearchParams(window.location.search);
-        const userIdFromUrl = queryParams.get('userId');
+        let userIdFromUrl = window.Telegram.WebApp.initDataUnsafe?.user?.id;
         if (userIdFromUrl) {
-            setSelectedUser(userIdFromUrl);
-            fetchMessages(userIdFromUrl);
+            userIdFromUrl = userIdFromUrl.toString();
+            console.log("User ID from mini app:", userIdFromUrl);
+        } else {
+            const queryParams = new URLSearchParams(window.location.search);
+            userIdFromUrl = queryParams.get('userId');
+            console.log("User ID from url:", userIdFromUrl);
         }
+        setSelectedUser(userIdFromUrl);
+        fetchMessages(userIdFromUrl);
     }, []);
 
     return (
