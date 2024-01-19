@@ -1,14 +1,11 @@
 import {useState, useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
-import AppRoutes from './Routes/AppRoutes';
-import {NavLink} from './utils';
 import './App.css';
+import Chat from './Pages/Chat'
 
 function App() {
     const [messages, setMessages] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [message, setMessage] = useState('');
-    const location = useLocation();
 
     const sendMessage = (messageText) => {
         if (!messageText.trim()) return;
@@ -81,21 +78,16 @@ function App() {
     return (
         <div className="app-container">
             <div className="app-wrapper">
-                <nav className="navbar">
-                    <NavLink to="/" currentPath={location.pathname}>
-                        Chat
-                    </NavLink>
-                </nav>
                 <div className="content-container">
-                    {/*{serverError && <div className="error-message">{serverError}</div>}*/}
-                    <AppRoutes
+                    <Chat
                         messages={messages}
                         message={message}
                         updateMessages={updateMessages}
                         setMessage={setMessage}
                         selectedUser={selectedUser}
                         handleKeyDown={handleKeyDown}
-                        sendMessage={sendMessage}/>
+                        sendMessage={sendMessage}
+                    />
                 </div>
             </div>
         </div>
