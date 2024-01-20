@@ -1,5 +1,6 @@
 .chat-container {
-    width: 400px;
+    max-width: 400px;
+    width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
@@ -7,8 +8,8 @@
 }
 
 .message-list {
+    max-height: calc(var(--tg-viewport-stable-height) - 50px - 60px - 20px);
     padding: 16px;
-    max-height: 300px;
     overflow-y: auto;
 }
 
@@ -17,6 +18,7 @@
     margin-top: auto;
     font-size: 0.8em;
     color: black;
+    overflow-y: hidden;
     /* other styles */
 }
 
