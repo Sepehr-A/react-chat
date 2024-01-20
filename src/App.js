@@ -9,52 +9,54 @@ function App() {
     const [message, setMessage] = useState('');
 
     const sendMessage = (messageText) => {
-        if (!messageText.trim()) return;
+    if (!messageText.trim()) return;
 
-        // Prepare the message data
-        const messageData = {
-            user_id: selectedUser,
-            text: messageText,
-            timestamp: new Date().toISOString(),
-            role: 'client' // Adding role here for immediate UI update
-        };
-
-        // Optimistically update the UI with the user's message
-        setMessages(prevMessages => [...prevMessages, messageData]);
-
-        // Send the message to the server
-        fetch(`${SERVER_URL}/api/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(messageData)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Assuming data.gptReply contains the reply message
-                if (data.success) {
-                    // Update messages state with the server's reply (GPT reply)
-                    setMessages(prevMessages => [
-                        ...prevMessages,
-                        {text: data.gptReply, role: 'server', timestamp: new Date().toISOString()}
-                    ]);
-                }
-            })
-            .catch(error => {
-                console.error('Error sending message:', error);
-                // Optionally remove the optimistic message or show an error
-                // setServerError('Failed to send message'); // Uncomment if you want to use serverError
-            });
-
-        // Clear the input
-        setMessage('');
+    // Prepare the message data
+    const messageData = {
+        user_id: selectedUser,
+        text: messageText,
+        timestamp: new Date().toISOString(),
+        role: 'client' // Adding role here for immediate UI update
     };
+
+    // Clear the input immediately
+    setMessage('');
+
+    // Optimistically update the UI with the user's message
+    setMessages(prevMessages => [...prevMessages, messageData]);
+
+    // Send the message to the server
+    fetch(`${SERVER_URL}/api/sendMessage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(messageData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Handle non-2xx responses here
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Assuming data.gptReply contains the reply message
+        if (data.success) {
+            // Update messages state with the server's reply (GPT reply)
+            setMessages(prevMessages => [
+                ...prevMessages.filter(msg => msg.timestamp !== messageData.timestamp), // Remove optimistic message
+                messageData, // Re-add it to maintain order in case server modified it
+                { text: data.gptReply, role: 'server', timestamp: new Date().toISOString() }
+            ]);
+        }
+    })
+    .catch(error => {
+        console.error('Error sending message:', error);
+        // Optionally handle the failed message here (e.g., by removing the optimistic message)
+    });
+};
+
 
 
     const updateMessages = (newMessages) => {
