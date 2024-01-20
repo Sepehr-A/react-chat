@@ -67,7 +67,7 @@ function App() {
     };
     // todo show user message as soon as they hit enter not with the answer
     useEffect(() => {
-        let userId=window.Telegram.WebApp?.initDataUnsafe?.user.id;
+        let userId=window.Telegram.WebApp.initDataUnsafe?.user?.id;
 
         if (window.Telegram && window.Telegram.WebApp && userId) {
             window.Telegram.WebApp.expand();
