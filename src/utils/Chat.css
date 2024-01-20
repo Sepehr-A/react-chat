@@ -8,9 +8,9 @@
 }
 
 .message-list {
-    max-height: calc(var(--tg-viewport-stable-height) - 50px - 60px - 20px);
+    flex-grow: 1; /* Allows the list to fill the space */
     padding: 16px;
-    overflow-y: auto;
+    overflow-y: auto; /* Inner scroll for messages only */
 }
 
 .message-timestamp {
@@ -24,16 +24,21 @@
 
 .input-container {
     display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%; /* Full width */
     padding: 8px;
+    background: white; /* Match background color of app */
     border-top: 1px solid #ddd;
+    z-index: 100; /* Ensure it's above other elements */
 }
 
 .message-input {
-    flex: 1;
+    flex-grow: 1;
+    margin-right: 8px;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-right: 8px;
 }
 
 .send-button {
@@ -53,6 +58,7 @@
     border-radius: 20px;
     margin-bottom: 10px;
     background-color: #f7f7f7;
+    word-wrap: break-word;
     /* other styles */
 }
 .client-message {
@@ -68,3 +74,4 @@
     height: 40px;
     padding: 0 15px;
 }
+
