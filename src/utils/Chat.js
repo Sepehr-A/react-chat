@@ -2,7 +2,7 @@ import './Chat.css';
 import {formatTimestamp} from '../utils';
 import {useEffect, useRef} from "react";
 
-const Chat = ({messages}) => {
+const Chat = ({messages, message, setMessage, handleKeyDown, sendMessage}) => {
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
@@ -22,7 +22,18 @@ const Chat = ({messages}) => {
                 <div ref={messagesEndRef}/>
                 {/* Invisible element at the end of the messages */}
             </div>
-            {/* Input container code remains the same */}
+            <div className="input-container">
+                <input
+                    className="message-input"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type your message..."
+                />
+                <button className="send-button" onClick={() => sendMessage(message)}>
+                    Send
+                </button>
+            </div>
         </div>
     );
 };

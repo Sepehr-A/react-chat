@@ -112,12 +112,12 @@ function App() {
                 <div className="content-container">
                     <Chat
                         messages={messages}
-                        // message={message}
-                        // updateMessages={updateMessages}
-                        // setMessage={setMessage}
-                        // selectedUser={selectedUser}
-                        // handleKeyDown={handleKeyDown}
-                        // sendMessage={sendMessage}
+                        message={message}
+                        updateMessages={updateMessages}
+                        setMessage={setMessage}
+                        selectedUser={selectedUser}
+                        handleKeyDown={handleKeyDown}
+                        sendMessage={sendMessage}
                     />
                 </div>
             </div>
