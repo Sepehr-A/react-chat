@@ -11,12 +11,18 @@ function App() {
     const sendMessage = (messageText) => {
         if (!messageText.trim()) return;
 
+        // Prepare the message data
         const messageData = {
             user_id: selectedUser,
             text: messageText,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            role: 'client' // Adding role here for immediate UI update
         };
 
+        // Optimistically update the UI with the user's message
+        setMessages(prevMessages => [...prevMessages, messageData]);
+
+        // Send the message to the server
         fetch(`${SERVER_URL}/api/sendMessage`, {
             method: 'POST',
             headers: {
@@ -33,18 +39,21 @@ function App() {
             .then(data => {
                 // Assuming data.gptReply contains the reply message
                 if (data.success) {
-                    // Update messages state with the user's message and the server's reply (GPT reply)
+                    // Update messages state with the server's reply (GPT reply)
                     setMessages(prevMessages => [
                         ...prevMessages,
-                        {...messageData, role: 'client'},
                         {text: data.gptReply, role: 'server', timestamp: new Date().toISOString()}
                     ]);
                 }
             })
             .catch(error => {
                 console.error('Error sending message:', error);
+                // Optionally remove the optimistic message or show an error
                 // setServerError('Failed to send message'); // Uncomment if you want to use serverError
             });
+
+        // Clear the input
+        setMessage('');
     };
 
 
@@ -67,7 +76,7 @@ function App() {
     };
     // todo show user message as soon as they hit enter not with the answer
     useEffect(() => {
-        let userId=window.Telegram.WebApp.initDataUnsafe?.user?.id;
+        let userId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
 
         if (window.Telegram && window.Telegram.WebApp && userId) {
             window.Telegram.WebApp.expand();
