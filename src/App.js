@@ -69,7 +69,7 @@ function App() {
     useEffect(() => {
         let userId;
 
-        if (window.Telegram.WebApp) {
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.isExpanded !== undefined) {
             window.Telegram.WebApp.expand();
             const initData = window.Telegram.WebApp.initData;
             if (initData) {
