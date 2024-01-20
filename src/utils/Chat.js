@@ -1,8 +1,15 @@
 import './Chat.css';
-// import {useEffect, useRef} from "react";
 import {formatTimestamp} from '../utils';
+import {useEffect, useRef} from "react";
 
 const Chat = ({messages, message, setMessage, handleKeyDown, sendMessage}) => {
+    const messagesEndRef = useRef(null);
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
+    };
+    useEffect(() => {
+        scrollToBottom(); // Call this function whenever messages change
+    }, [messages]);
     return (
         <div className="chat-container">
             <div className="message-list">
