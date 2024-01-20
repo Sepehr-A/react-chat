@@ -16,7 +16,6 @@ function App() {
             text: messageText,
             timestamp: new Date().toISOString()
         };
-        console.log(JSON.stringify(messageData))
 
         fetch(`${SERVER_URL}/api/sendMessage`, {
             method: 'POST',
@@ -68,17 +67,32 @@ function App() {
     };
     // todo show user message as soon as they hit enter not with the answer
     useEffect(() => {
-        let userIdFromUrl = window.Telegram.WebApp.initDataUnsafe?.user?.id;
-        if (userIdFromUrl) {
-            userIdFromUrl = userIdFromUrl.toString();
-            console.log("User ID from mini app:", userIdFromUrl);
+        let userId;
+
+        if (window.Telegram && window.Telegram.WebApp) {
+            const initData = window.Telegram.WebApp.initData;
+            if (initData) {
+                const decodedData = decodeURIComponent(initData);
+                const parsedData = new URLSearchParams(decodedData);
+
+                const userData = parsedData.get('user');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    userId = user.id.toString();
+                    console.log("User ID from Telegram Mini App:", userId);
+                }
+            }
         } else {
+            // Fallback to URL query param if not in Telegram Mini App context
             const queryParams = new URLSearchParams(window.location.search);
-            userIdFromUrl = queryParams.get('userId');
-            console.log("User ID from url:", userIdFromUrl);
+            userId = queryParams.get('userId');
+            console.log("User ID from URL:", userId);
         }
-        setSelectedUser(userIdFromUrl);
-        fetchMessages(userIdFromUrl);
+
+        if (userId) {
+            setSelectedUser(userId);
+            fetchMessages(userId);
+        }
     }, []);
 
     return (
