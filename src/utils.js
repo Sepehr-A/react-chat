@@ -1,16 +1,13 @@
-import {Link} from "react-router-dom";
+export function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    let hours = date.getHours().toString();
+    let minutes = date.getMinutes().toString();
 
-export const formatTimestamp = (timestampMilliseconds) => {
-    const date = new Date(timestampMilliseconds);
-    return `${date.getHours()}:${date.getMinutes()}`;
-};
+    // Pad hours and minutes with leading zeros if they are less than two digits
+    hours = hours.padStart(2, '0');
+    minutes = minutes.padStart(2, '0');
+
+    return `${hours}:${minutes}`;
+}
 
 
-export const NavLink = ({to, currentPath, children}) => {
-    const isActive = currentPath === to;
-    return (
-        <Link to={to} className={`nav-link ${isActive ? 'active-nav-link' : ''}`}>
-            {children}
-        </Link>
-    );
-};
