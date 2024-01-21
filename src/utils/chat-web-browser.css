@@ -25,30 +25,35 @@
 }
 
 .input-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     padding: 8px;
     border-top: 1px solid #ddd;
-    /*background: white;*/
-    box-sizing: border-box;
+    background: white;
+    width: 100%; /* Ensure input container does not exceed chat container width */
+    box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .message-input {
-    flex: 1;
-    padding: 8px;
+    flex: 1; /* Take up remaining space */
+    padding: 8px 15px; /* Adjusted padding */
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-right: 8px;
-    box-sizing: border-box;
+    margin-right: 8px; /* Maintain this margin to separate input from button */
+    box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .send-button {
     background-color: #4caf50;
-    color: #fff;
+    color: white;
     border: none;
-    padding: 8px 16px; /* Adjust padding as needed */
+    padding: 8px 16px; /* Adjust this padding if necessary */
     border-radius: 4px;
     cursor: pointer;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .message-item {
