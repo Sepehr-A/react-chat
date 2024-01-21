@@ -1,0 +1,78 @@
+.chat-container {
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.message-list {
+    flex-grow: 1; /* Allows the list to fill the space */
+    padding-bottom: 60px; /* Add this line with the calculated padding */
+    overflow-y: auto; /* Inner scroll for messages only */
+}
+
+.message-timestamp {
+    align-self: flex-end;
+    margin-top: auto;
+    font-size: 0.8em;
+    color: black;
+    /* other styles */
+}
+
+.input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 50px; /* Adjust if there are other padding or borders */
+    padding: 10px; /* Consider total height including padding and border */
+    background: white;
+    border-top: 1px solid #ddd;
+    z-index: 2;
+}
+
+.message-input {
+    flex-grow: 1;
+    margin-right: 8px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.send-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: #f7f7f7;
+    padding: 10px 15px; /* Remove extra padding from bottom */
+    word-wrap: break-word;
+}
+
+.client-message {
+    background-color: #4caf50;
+    align-self: flex-end;
+}
+
+.server-message {
+    background-color: #3498db;
+    align-self: flex-start;
+}
+
+.message-input {
+    height: 40px;
+    padding: 0 15px;
+}

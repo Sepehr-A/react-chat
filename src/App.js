@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import './App.css';
 import Chat from './utils/Chat';
 import SERVER_URL from './utils/config';
 
@@ -47,7 +46,7 @@ function App() {
                     setMessages(prevMessages => [
                         ...prevMessages.filter(msg => msg.timestamp !== messageData.timestamp), // Remove optimistic message
                         messageData, // Re-add it to maintain order in case server modified it
-                        {text: data.gptReply, role: 'server', timestamp: new Date().toString()}
+                        {text: data.gptReply, role: 'server', timestamp: new Date().toISOString()}
                     ]);
                 }
             })
@@ -68,6 +67,14 @@ function App() {
             .then(data => setMessages(data.allMessages)) // Update here to match server's response
         // .catch(error => setServerError('Failed to load messages'));
     };
+
+     useEffect(() => {
+        if (window.Telegram.WebApp.initDataUnsafe?.user) {
+            require('./utils/app-mini-app.css'); // Dynamically load mini-app styles
+        } else {
+            require('./utils/app-web-browser.css'); // Dynamically load web-browser styles
+        }
+    }, []);
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
