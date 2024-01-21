@@ -56,7 +56,6 @@ function App() {
             });
     };
 
-
     const updateMessages = (newMessages) => {
         setMessages(newMessages);
     };
@@ -67,14 +66,6 @@ function App() {
             .then(data => setMessages(data.allMessages)) // Update here to match server's response
         // .catch(error => setServerError('Failed to load messages'));
     };
-
-     useEffect(() => {
-        if (window.Telegram.WebApp.initDataUnsafe?.user) {
-            require('./utils/app-mini-app.css'); // Dynamically load mini-app styles
-        } else {
-            require('./utils/app-web-browser.css'); // Dynamically load web-browser styles
-        }
-    }, []);
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -114,21 +105,15 @@ function App() {
     }, []);
 
     return (
-        <div className="app-container">
-            <div className="app-wrapper">
-                <div className="content-container">
-                    <Chat
-                        messages={messages}
-                        message={message}
-                        updateMessages={updateMessages}
-                        setMessage={setMessage}
-                        selectedUser={selectedUser}
-                        handleKeyDown={handleKeyDown}
-                        sendMessage={sendMessage}
-                    />
-                </div>
-            </div>
-        </div>
+        <Chat
+            messages={messages}
+            message={message}
+            updateMessages={updateMessages}
+            setMessage={setMessage}
+            selectedUser={selectedUser}
+            handleKeyDown={handleKeyDown}
+            sendMessage={sendMessage}
+        />
     );
 }
 
