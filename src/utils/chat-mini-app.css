@@ -76,19 +76,3 @@
     height: 40px;
     padding: 0 15px;
 }
-
-.app-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Aligns children to start and end of container */
-    height: var(--tg-viewport-stable-height);
-    max-height: var(--tg-viewport-stable-height); /* Adjust max-height to viewport */
-}
-
-.error-message {
-    color: red;
-}
-
-* {
-    overflow-x: hidden;
-}

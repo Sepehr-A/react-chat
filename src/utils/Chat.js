@@ -3,11 +3,14 @@ import {useEffect, useRef} from "react";
 
 const Chat = ({messages, message, setMessage, handleKeyDown, sendMessage}) => {
     useEffect(() => {
-        if (window.Telegram.WebApp.initDataUnsafe?.user) {
-            require('./chat-mini-app.css'); // Mini-app styles for Chat component
-        } else {
-            require('./chat-web-browser.css'); // Web-browser styles for Chat component
-        }
+        const loadStyle = async () => {
+            if (window.Telegram.WebApp.initDataUnsafe?.user) {
+                await import('./chat-mini-app.css');
+            } else {
+                await import('./chat-web-browser.css');
+            }
+        };
+        loadStyle();
     }, []);
     const messagesEndRef = useRef(null);
     const scrollToBottom = () => {
