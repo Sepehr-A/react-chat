@@ -1,4 +1,3 @@
-// import './Chat.css';
 import {formatTimestamp} from '../utils';
 import {useEffect, useRef} from "react";
 

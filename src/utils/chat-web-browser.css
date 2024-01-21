@@ -53,6 +53,7 @@
     background-color: #f7f7f7;
     /* other styles */
 }
+
 .client-message {
     background-color: #4caf50;
     align-self: flex-end;
@@ -62,6 +63,7 @@
     background-color: #3498db;
     align-self: flex-start;
 }
+
 .message-input {
     height: 40px;
     padding: 0 15px;
