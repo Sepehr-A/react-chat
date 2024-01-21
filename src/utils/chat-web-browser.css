@@ -6,7 +6,7 @@
     overflow: hidden; /* This will clip off any content that exceeds the container */
     display: flex; /* Use flexbox to layout child elements */
     flex-direction: column; /* Stack children vertically */
-    height: calc(100vh - 30px); /* Full height minus any top padding/margins */
+    height: calc(100vh - 40px); /* Full height minus any top padding/margins */
 }
 
 .message-list {
