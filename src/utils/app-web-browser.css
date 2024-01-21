@@ -6,11 +6,32 @@
     padding-top: 30px;
 }
 
-/*.message-item {*/
-/*    padding: 8px;*/
-/*    margin-bottom: 8px;*/
-/*    border-radius: 4px;*/
-/*}*/
+.user-button {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.message-item {
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.client-message {
+    background-color: #f0f0f0;
+}
+
+.server-message {
+    background-color: #cce5ff;
+}
 
 .error-message {
     color: red;
