@@ -77,3 +77,16 @@
     height: 40px;
     padding: 0 15px;
 }
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 30px;
+}
+
+.error-message {
+    color: red;
+}
+
