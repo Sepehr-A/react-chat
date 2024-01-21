@@ -28,7 +28,8 @@
     display: flex;
     padding: 8px;
     border-top: 1px solid #ddd;
-    background: white;
+    /*background: white;*/
+    box-sizing: border-box;
 }
 
 .message-input {
@@ -37,15 +38,17 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-right: 8px;
+    box-sizing: border-box;
 }
 
 .send-button {
     background-color: #4caf50;
     color: #fff;
     border: none;
-    padding: 8px;
+    padding: 8px 16px; /* Adjust padding as needed */
     border-radius: 4px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .message-item {
