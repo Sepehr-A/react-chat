@@ -1,19 +1,19 @@
 .chat-container {
     width: 400px;
+    max-height: calc(100vh - 100px); /* Use max-height instead of height for flexibility */
+    margin: 30px auto; /* Center container with top margin */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative; /* Ensure this is relative for absolute positioning inside */
     border-radius: 8px;
-    overflow: hidden; /* This will clip off any content that exceeds the container */
-    display: flex; /* Use flexbox to layout child elements */
-    flex-direction: column; /* Stack children vertically */
-    height: calc(100vh - 100px); /* Full height minus any top padding/margins */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .message-list {
     padding: 16px;
-    overflow-y: auto;
-    flex-grow: 1; /* Let message list fill available space */
-    margin-bottom: 60px; /* Space for input, adjust as needed */
+    overflow-y: auto; /* Keep this if you want scrolling when content overflows */
+    flex-grow: 1;
 }
 
 .message-timestamp {
@@ -25,14 +25,10 @@
 }
 
 .input-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     padding: 8px;
     border-top: 1px solid #ddd;
-    background: white; /* Match background to ensure consistency */
+    background: white;
 }
 
 .message-input {
@@ -78,13 +74,6 @@
     padding: 0 15px;
 }
 
-.app-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding-top: 30px;
-}
 
 .error-message {
     color: red;
